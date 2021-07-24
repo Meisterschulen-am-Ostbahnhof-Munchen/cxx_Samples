@@ -26,7 +26,7 @@ void user(void)
 	 vector<Stooge*> roles;
 
 
-     cout << "Example cpp_no_factory." << endl;
+     cout << "Example cpp_components_no_factory." << endl;
 
      roles.push_back(new Larry);
      roles.push_back(new Moe);
