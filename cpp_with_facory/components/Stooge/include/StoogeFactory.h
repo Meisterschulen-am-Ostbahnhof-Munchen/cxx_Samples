@@ -9,11 +9,16 @@
 #define COMPONENTS_STOOGE_INCLUDE_STOOGEFACTORY_H_
 
 
+typedef enum e_coice
+{
+	cLarry, cMoe, cCurly
+} t_choice;
+
 class StoogeFactory
 {
   public:
     // Factory Method
-    static Stooge *make_stooge(int choice);
+    static Stooge *make_stooge(t_choice choice);
 };
 
 

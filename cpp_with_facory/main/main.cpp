@@ -16,7 +16,7 @@ using std::vector;
 #include "StoogeFactory.h"
 
 /* these 3 Includes are no more needed. !! and THIS is the Advantage !*/
-/* because they are now in "priv_include" they would not be ABLE to be included !
+/* because they are now in "priv_include" they would not be ABLE to be included ! */
 //NOT #include "Larry.h"
 //NOT #include "Moe.h"
 //NOT #include "Curly.h"
@@ -33,9 +33,9 @@ extern "C" void app_main(void)
      cout << "Example cpp_with_facory." << endl;
 
 
-     roles.push_back(StoogeFactory::make_stooge(1));
-     roles.push_back(StoogeFactory::make_stooge(2));
-     roles.push_back(StoogeFactory::make_stooge(3));
+     roles.push_back(StoogeFactory::make_stooge(cLarry));
+     roles.push_back(StoogeFactory::make_stooge(cMoe));
+     roles.push_back(StoogeFactory::make_stooge(cCurly));
 
      for (int i = 0; i < roles.size(); i++)
        roles[i]->slap_stick();

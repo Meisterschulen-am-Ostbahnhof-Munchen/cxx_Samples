@@ -14,12 +14,21 @@
 #include "Moe.h"
 #include "Curly.h"
 
-Stooge *StoogeFactory::make_stooge(int choice)
+
+
+
+
+
+
+Stooge *StoogeFactory::make_stooge(t_choice choice)
 {
-  if (choice == 1)
-    return new Larry;
-  else if (choice == 2)
-    return new Moe;
-  else
-    return new Curly;
+	switch (choice) {
+		case cLarry:
+		    return new Larry;
+		case cMoe:
+		    return new Moe;
+		case cCurly:
+		default: //needed to statisfy the Compiler.
+		    return new Curly;
+	}
 }
