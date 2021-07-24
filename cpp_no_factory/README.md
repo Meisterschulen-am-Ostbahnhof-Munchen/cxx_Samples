@@ -5,7 +5,7 @@ cpp_no_factory
 
 
 
-
+https://sourcemaking.com/design_patterns/factory_method/cpp/1
 
 
 

@@ -6,7 +6,7 @@ cpp_with_facory
 
 
 
-
+https://sourcemaking.com/design_patterns/factory_method/cpp/1
 
 
 
