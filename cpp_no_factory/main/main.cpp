@@ -25,6 +25,9 @@ extern "C" void app_main(void)
 
 	 vector<Stooge*> roles;
 
+
+     cout << "Example cpp_no_factory." << endl;
+
      roles.push_back(new Larry);
      roles.push_back(new Moe);
      roles.push_back(new Curly);

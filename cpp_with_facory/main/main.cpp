@@ -28,6 +28,10 @@ extern "C" void app_main(void)
 
 	 vector<Stooge*> roles;
 
+
+     cout << "Example cpp_with_facory." << endl;
+
+
      roles.push_back(StoogeFactory::make_stooge(1));
      roles.push_back(StoogeFactory::make_stooge(2));
      roles.push_back(StoogeFactory::make_stooge(3));
