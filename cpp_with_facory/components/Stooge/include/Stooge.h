@@ -9,6 +9,9 @@
 #define COMPONENTS_STOOGE_INCLUDE_STOOGE_H_
 
 
+
+//Stooge is a interface. it has no Implementation !
+
 class Stooge
 {
   public:
