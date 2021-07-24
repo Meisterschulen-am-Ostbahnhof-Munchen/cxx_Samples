@@ -5,6 +5,8 @@ here we show:
 the User only needs to know the Stooge and the StoogeFactory.
 PRIV_REQUIRES Stooge StoogeFactory)
 
+only the Factory knows the Implementations: 
+PRIV_REQUIRES Stooge Larry Moe Curly)
 
 https://sourcemaking.com/design_patterns/factory_method/cpp/1
 
