@@ -16,6 +16,7 @@ using std::vector;
 #include "StoogeFactory.h"
 
 /* these 3 Includes are no more needed. !! and THIS is the Advantage !*/
+/* because they are now in "priv_include" they would not be ABLE to be included !
 //NOT #include "Larry.h"
 //NOT #include "Moe.h"
 //NOT #include "Curly.h"
