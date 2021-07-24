@@ -11,7 +11,8 @@ esp_err_t event_handler(void *ctx, system_event_t *event)
     return ESP_OK;
 }
 
-void app_main(void)
+/* Inside .cpp file, app_main function must be declared with C linkage */
+extern "C" void app_main(void)
 {
     nvs_flash_init();
     tcpip_adapter_init();
