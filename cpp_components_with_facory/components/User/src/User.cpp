@@ -30,7 +30,7 @@ void user(void)
 	 vector<Stooge*> roles;
 
 
-     cout << "Example cpp_with_facory." << endl;
+     cout << "Example cpp_components_with_facory." << endl;
 
 
      roles.push_back(StoogeFactory::make_stooge(cLarry));
