@@ -224,14 +224,11 @@ extern "C" void app_main()
 
 	ClassWithCallback sortAscending(true), sortDescending(false);
 
+	qsort( &test[0], test.size(), sizeof(int), QSortMemberFunctionCallback(&sortAscending, &ClassWithCallback::CompareMemberFunc));
 	
-	__compar_fn_t compar_fn_sortAscending = QSortMemberFunctionCallback(&sortAscending, &ClassWithCallback::CompareMemberFunc);
-	qsort( &test[0], test.size(), sizeof(int), compar_fn_sortAscending);
-
 	assert( IsSortedAscending(test) );
 
-	__compar_fn_t compar_fn_sortDescending = QSortMemberFunctionCallback(&sortDescending, &ClassWithCallback::CompareMemberFunc);
-	qsort( &test[0], test.size(), sizeof(int), compar_fn_sortDescending);
+	qsort( &test[0], test.size(), sizeof(int), QSortMemberFunctionCallback(&sortDescending, &ClassWithCallback::CompareMemberFunc));
 	
 	assert( IsSortedDescending(test) );
 
