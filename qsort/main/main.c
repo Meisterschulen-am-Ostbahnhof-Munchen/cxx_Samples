@@ -39,7 +39,10 @@ void app_main(void)
        printf("%d ", values[n]);
     }
 
-    qsort(values, 5, sizeof(int), cmpfunc);
+
+
+    __compar_fn_t cmpfunc0 = cmpfunc;
+    qsort(values, 5, sizeof(int), cmpfunc0);
 
     printf("\nAfter sorting the list is: \n");
     for( n = 0 ; n < 5; n++ ) {
