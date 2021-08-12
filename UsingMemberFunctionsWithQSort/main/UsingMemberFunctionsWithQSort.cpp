@@ -208,7 +208,7 @@ QSortMemberFunctionCallback::~QSortMemberFunctionCallback()
 
 /* Inside a .cpp file, app_main function must be declared with C linkage */
 extern "C" void app_main()
-}
+{
 	std::vector<int> test;
 	SetupTestVectorWithRandomData(test, 100);
 
@@ -225,6 +225,6 @@ extern "C" void app_main()
 	
 	assert( IsSortedDescending(test) );
 
-	return 0;
+	return;
 }
 
