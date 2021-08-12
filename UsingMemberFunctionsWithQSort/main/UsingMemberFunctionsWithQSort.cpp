@@ -88,9 +88,9 @@ class QsortCallbackBase
 public:
 	// input: pointer to a unique C callback. 
 	QsortCallbackBase(LPFN_QSortCCallback pCCallback)
-		:	m_pClass( NULL ),
-			m_pMethod( NULL ),
-			m_pCCallback( pCCallback )
+		:	m_pCCallback( pCCallback ),
+			m_pClass( NULL ),
+			m_pMethod( NULL )
 	{
 	}
 
