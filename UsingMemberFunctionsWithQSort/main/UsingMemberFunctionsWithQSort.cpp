@@ -4,6 +4,13 @@
 #include <vector>
 #include <random>
 #include <cassert>
+#include <iostream>
+#include <memory>
+#include <algorithm>
+
+using std::cout;
+using std::endl;
+using std::string;
 
 void SetupTestVectorWithRandomData(std::vector<int>& test_vector, size_t size)
 {
@@ -228,6 +235,6 @@ extern "C" void app_main()
 	
 	assert( IsSortedDescending(test) );
 
-	return;
+    cout << "Example finished." << endl;
 }
 
