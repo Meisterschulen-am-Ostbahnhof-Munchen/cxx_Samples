@@ -46,11 +46,11 @@ extern "C" void app_main(void)
     /* start running Thread1 and Thread2 thread */
 	// Create a thread on core 1.
     auto cfg1 = mTask1.create_config("Thread 1", 1, 3 * 1024, 5);
-    esp_pthread_set_cfg(&cfg1);
+    mTask1.esp_pthread_set_cfg(&cfg1);
     std::thread mThread1(&AppTask::Task1::run, &mTask1);
     // Create a thread on core 1.
     auto cfg2 = mTask2.create_config("Thread 2", 1, 3 * 1024, 5);
-    esp_pthread_set_cfg(&cfg2);
+    mTask2.esp_pthread_set_cfg(&cfg2);
     std::thread mThread2(&AppTask::Task2::run, &mTask2);
 
     /* wait for core and base being initialized */

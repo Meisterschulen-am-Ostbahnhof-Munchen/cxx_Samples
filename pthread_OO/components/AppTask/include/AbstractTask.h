@@ -30,6 +30,8 @@ namespace AppTask
 
         esp_pthread_cfg_t create_config(const char *name, int core_id, int stack, int prio);
 
+        esp_err_t esp_pthread_set_cfg(const esp_pthread_cfg_t *cfg);
+
         /*
         The tasks run method .
         It will call the protected runXXX() function as appropriate.

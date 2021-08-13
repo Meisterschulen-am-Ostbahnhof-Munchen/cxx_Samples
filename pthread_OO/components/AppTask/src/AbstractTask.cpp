@@ -34,6 +34,10 @@ namespace AppTask
         return cfg;
     }
 
+    esp_err_t AbstractTask::esp_pthread_set_cfg(const esp_pthread_cfg_t *cfg) {
+    	return esp_pthread_set_cfg(cfg);
+    }
+
     void AbstractTask::run()
     {
 
@@ -119,6 +123,7 @@ namespace AppTask
     {
 
     }
+
 
 
     void AbstractTask::cbErrorOutp(uint8_t bFun, uint8_t bLocation, int16_t iCause)
