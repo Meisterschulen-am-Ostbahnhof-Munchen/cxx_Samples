@@ -47,11 +47,11 @@ extern "C" void app_main(void)
 	// Create a thread on core 1.
     mTask1.create_config("Thread 1", 1, 3 * 1024, 5);
     mTask1.esp_pthread_set_config();
-    std::thread mThread1(AppTask::AbstractTask::exec, &mTask1);
+    mTask1.start();
     // Create a thread on core 1.
     mTask2.create_config("Thread 2", 1, 3 * 1024, 5);
     mTask2.esp_pthread_set_config();
-    std::thread mThread2(&AppTask::Task2::run, &mTask2);
+    mTask2.start();
 
     /* wait for core and base being initialized */
     while ((!mTask1.isInitDone()) || (!mTask2.isInitDone()))
@@ -75,7 +75,7 @@ extern "C" void app_main(void)
     mTask1.exit();
     mTask2.exit();
 
-    mThread1.join();
-    mThread2.join();
+    mTask1.join();
+    mTask2.join();
 
 }

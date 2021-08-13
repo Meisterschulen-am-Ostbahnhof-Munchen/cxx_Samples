@@ -12,6 +12,8 @@
 
 #include <chrono>
 #include <atomic>
+#include <thread>
+
 #include "esp_err.h"
 
 using namespace std::chrono;
@@ -27,6 +29,23 @@ namespace AppTask
     public:
         AbstractTask();
         virtual ~AbstractTask();
+
+    	/**
+    	 * Starts the thread.
+    	 **/
+    	inline void start() {
+    		uthread.reset(new std::thread(AbstractTask::exec, this));
+    	}
+
+    	/**
+    	 * Waits for the thread to terminate.
+    	 **/
+    	inline void join() {
+    		if (nullptr != uthread) {
+    			uthread->join();
+    			uthread = nullptr;
+    		}
+    	}
 
         void create_config(const char *name, int core_id, int stack, int prio);
 
@@ -142,6 +161,11 @@ namespace AppTask
         std::atomic_bool m_initDone = ATOMIC_VAR_INIT(false);
 
     public:
+
+    	// pointer to the thread
+    	std::unique_ptr<std::thread> uthread = nullptr;
+
+
     	// static function which points back to the instance
     	static void exec(AbstractTask* cppThread) {
     		cppThread->run();
