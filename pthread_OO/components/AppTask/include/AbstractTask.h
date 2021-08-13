@@ -22,10 +22,7 @@ namespace AppTask
     {
     public:
         AbstractTask();
-        ~AbstractTask();
-        //Description	Resource	Path	Location	Type
-        //Class 'AbstractTask' has virtual method 'runExit' but non-virtual destructor	AbstractTask.h	/pthread_OO/components/AppTask/include	line 25	Code Analysis Problem
-
+        virtual ~AbstractTask();
 
         /*
         The tasks run method .
