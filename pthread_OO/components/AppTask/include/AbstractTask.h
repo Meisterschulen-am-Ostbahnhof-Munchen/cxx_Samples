@@ -10,7 +10,10 @@
 #ifndef COMPONENTS_APPTASK_INCLUDE_ABSTRACTTASK_H_
 #define COMPONENTS_APPTASK_INCLUDE_ABSTRACTTASK_H_
 
+#include <chrono>
 #include <atomic>
+
+using namespace std::chrono;
 
 namespace AppTask
 {
@@ -52,12 +55,12 @@ namespace AppTask
          * get the Cycle Time
          * @return Cycle Time
          */
-		int64_t getMilliCycle() const;
+        std::chrono::milliseconds getMilliCycle() const;
 		/**
 		 * set the Cycle Time
 		 * @param milliCycle
 		 */
-		void setMilliCycle(int64_t milliCycle);
+		void setMilliCycle(std::chrono::milliseconds milliCycle);
 
     protected:
 
@@ -103,7 +106,7 @@ namespace AppTask
     private:
 
         /** This variable is the cycle Time of the Task.  */
-        int64_t milli_cycle;
+        std::chrono::milliseconds milli_cycle;
 
         /** This variable will get set if the threed needs to get aborted */
         std::atomic_bool m_abort = ATOMIC_VAR_INIT(false);

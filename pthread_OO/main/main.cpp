@@ -15,6 +15,7 @@
 
 #include "Task1.h"
 #include "Task2.h"
+#include "print_thread_info.h"
 
 static bool s_closeApp = false;
 
@@ -26,17 +27,7 @@ const auto sleep_time = seconds
     5
 };
 
-void print_thread_info(const char *extra = nullptr)
-{
-    std::stringstream ss;
-    if (extra) {
-        ss << extra;
-    }
-    ss << "Core id: " << xPortGetCoreID()
-       << ", prio: " << uxTaskPriorityGet(nullptr)
-       << ", minimum free stack: " << uxTaskGetStackHighWaterMark(nullptr) << " bytes.";
-    ESP_LOGI(pcTaskGetTaskName(nullptr), "%s", ss.str().c_str());
-}
+
 
 void thread_func_inherited()
 {
@@ -91,9 +82,12 @@ extern "C" void app_main(void)
 	AppTask::Task1 mTask1;
 	AppTask::Task2 mTask2;
 
+	mTask1.setMilliCycle(sleep_time);
+	mTask2.setMilliCycle(sleep_time);
+
     /* start running Thread1 and Thread2 thread */
 	// Create a thread on core 1.
-    auto cfg1 = create_config("Thread 2", 1, 3 * 1024, 5);
+    auto cfg1 = create_config("Thread 1", 1, 3 * 1024, 5);
     esp_pthread_set_cfg(&cfg1);
     std::thread mThread1(&AppTask::Task1::run, &mTask1);
     // Create a thread on core 1.
@@ -116,11 +110,7 @@ extern "C" void app_main(void)
     // Let the main task do something too
     while (!s_closeApp)
     {
-        std::stringstream ss;
-        ss << "core id: " << xPortGetCoreID()
-           << ", prio: " << uxTaskPriorityGet(nullptr)
-           << ", minimum free stack: " << uxTaskGetStackHighWaterMark(nullptr) << " bytes.";
-        ESP_LOGI(pcTaskGetTaskName(nullptr), "%s", ss.str().c_str());
+        print_thread_info("This thread is the main Task.");
         std::this_thread::sleep_for(sleep_time);
     }
 

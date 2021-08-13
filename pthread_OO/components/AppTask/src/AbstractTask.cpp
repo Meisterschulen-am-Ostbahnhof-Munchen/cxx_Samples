@@ -11,6 +11,7 @@
 #include <thread>
 #include <chrono>
 #include "AbstractTask.h"
+#include "print_thread_info.h"
 
 namespace AppTask
 {
@@ -58,6 +59,7 @@ namespace AppTask
         while (!m_abort.load())
         {
             (void)runCyclic();
+            print_thread_info("This thread is the AbstractTask Task.");
             std::this_thread::sleep_for(std::chrono::milliseconds(milli_cycle));
         }
 
@@ -116,11 +118,11 @@ namespace AppTask
         (void)iCause;
     }
 
-	int64_t AbstractTask::getMilliCycle() const {
+    std::chrono::milliseconds AbstractTask::getMilliCycle() const {
 		return milli_cycle;
 	}
 
-	void AbstractTask::setMilliCycle(int64_t milliCycle) {
+	void AbstractTask::setMilliCycle(std::chrono::milliseconds milliCycle) {
 		milli_cycle = milliCycle;
 	}
 
