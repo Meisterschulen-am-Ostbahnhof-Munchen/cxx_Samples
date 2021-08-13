@@ -141,6 +141,11 @@ namespace AppTask
         */
         std::atomic_bool m_initDone = ATOMIC_VAR_INIT(false);
 
+    public:
+    	// static function which points back to the instance
+    	static void exec(AbstractTask* cppThread) {
+    		cppThread->run();
+    	}
     };
 
 } /* namespace AppTask */

@@ -47,7 +47,7 @@ extern "C" void app_main(void)
 	// Create a thread on core 1.
     mTask1.create_config("Thread 1", 1, 3 * 1024, 5);
     mTask1.esp_pthread_set_config();
-    std::thread mThread1(&AppTask::Task1::run, &mTask1);
+    std::thread mThread1(AppTask::AbstractTask::exec, &mTask1);
     // Create a thread on core 1.
     mTask2.create_config("Thread 2", 1, 3 * 1024, 5);
     mTask2.esp_pthread_set_config();
