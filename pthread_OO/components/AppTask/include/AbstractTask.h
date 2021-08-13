@@ -83,10 +83,6 @@ namespace AppTask
         */
         static void cbWatchdog(void);
 
-        /**
-        A get time ms implementation to be used fir the specific task
-        */
-        static int32_t cbGetTimeMs(void);
 
         /**
         A dummy debug callback output function
@@ -96,17 +92,17 @@ namespace AppTask
     private:
 
         /** This variable will get set if the threed needs to get aborted */
-        std::atomic_bool m_abort = false;
+        std::atomic_bool m_abort = ATOMIC_VAR_INIT(false);
 
         /*
         This variable will be set once cyclic execution may start
         */
-        std::atomic_bool m_cyclic = false;
+        std::atomic_bool m_cyclic = ATOMIC_VAR_INIT(false);
 
         /*
         This variable will be set as the ECU Initialisaton is complete.
         */
-        std::atomic_bool m_initDone = false;
+        std::atomic_bool m_initDone = ATOMIC_VAR_INIT(false);
 
     };
 
