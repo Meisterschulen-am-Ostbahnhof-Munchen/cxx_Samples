@@ -48,6 +48,17 @@ namespace AppTask
         void exit();
 
 
+        /**
+         * get the Cycle Time
+         * @return Cycle Time
+         */
+		int64_t getMilliCycle() const;
+		/**
+		 * set the Cycle Time
+		 * @param milliCycle
+		 */
+		void setMilliCycle(int64_t milliCycle);
+
     protected:
 
         /**
@@ -90,6 +101,9 @@ namespace AppTask
         static void cbErrorOutp(uint8_t bFun, uint8_t bLocation, int16_t iCause);
 
     private:
+
+        /** This variable is the cycle Time of the Task.  */
+        int64_t milli_cycle;
 
         /** This variable will get set if the threed needs to get aborted */
         std::atomic_bool m_abort = ATOMIC_VAR_INIT(false);

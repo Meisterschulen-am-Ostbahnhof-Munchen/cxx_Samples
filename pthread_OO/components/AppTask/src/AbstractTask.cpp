@@ -15,6 +15,7 @@
 namespace AppTask
 {
     AbstractTask::AbstractTask()
+    : milli_cycle(10)
     {
     }
 
@@ -57,7 +58,7 @@ namespace AppTask
         while (!m_abort.load())
         {
             (void)runCyclic();
-            std::this_thread::sleep_for(std::chrono::milliseconds(10));
+            std::this_thread::sleep_for(std::chrono::milliseconds(milli_cycle));
         }
 
         /* any cleanup before terminating */
@@ -115,4 +116,12 @@ namespace AppTask
         (void)iCause;
     }
 
-} /* namespace ECU_DRIVER */
+	int64_t AbstractTask::getMilliCycle() const {
+		return milli_cycle;
+	}
+
+	void AbstractTask::setMilliCycle(int64_t milliCycle) {
+		milli_cycle = milliCycle;
+	}
+
+} /* namespace AppTask */
