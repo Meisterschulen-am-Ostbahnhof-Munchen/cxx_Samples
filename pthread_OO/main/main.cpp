@@ -1,21 +1,12 @@
 /* 
 */
 
-#include <iostream>
-#include <thread>
+#include <AbstractTask.h>
+#include <print_thread_info.h>
+#include <Task1.h>
+#include <Task2.h>
 #include <chrono>
-#include <memory>
-#include <string>
-#include <sstream>
-#include <esp_pthread.h>
-#include <freertos/FreeRTOS.h>
-#include <freertos/task.h>
-#include <esp_log.h>
-
-
-#include "Task1.h"
-#include "Task2.h"
-#include "print_thread_info.h"
+#include <thread>
 
 static bool s_closeApp = false;
 
