@@ -29,50 +29,8 @@ const auto sleep_time = seconds
 
 
 
-void thread_func_inherited()
-{
-    while (true) {
-        print_thread_info("This is the INHERITING thread with the same parameters as our parent, including name. ");
-        std::this_thread::sleep_for(sleep_time);
-    }
-}
 
-void spawn_another_thread()
-{
-    // Create a new thread, it will inherit our configuration
-    std::thread inherits(thread_func_inherited);
 
-    while (true) {
-        print_thread_info();
-        std::this_thread::sleep_for(sleep_time);
-    }
-}
-
-void thread_func_any_core()
-{
-    while (true) {
-        print_thread_info("This thread (with the default name) may run on any core.");
-        std::this_thread::sleep_for(sleep_time);
-    }
-}
-
-void thread_func()
-{
-    while (true) {
-        print_thread_info();
-        std::this_thread::sleep_for(sleep_time);
-    }
-}
-
-esp_pthread_cfg_t create_config(const char *name, int core_id, int stack, int prio)
-{
-    auto cfg = esp_pthread_get_default_config();
-    cfg.thread_name = name;
-    cfg.pin_to_core = core_id;
-    cfg.stack_size = stack;
-    cfg.prio = prio;
-    return cfg;
-}
 
 extern "C" void app_main(void)
 {
@@ -87,11 +45,11 @@ extern "C" void app_main(void)
 
     /* start running Thread1 and Thread2 thread */
 	// Create a thread on core 1.
-    auto cfg1 = create_config("Thread 1", 1, 3 * 1024, 5);
+    auto cfg1 = mTask1.create_config("Thread 1", 1, 3 * 1024, 5);
     esp_pthread_set_cfg(&cfg1);
     std::thread mThread1(&AppTask::Task1::run, &mTask1);
     // Create a thread on core 1.
-    auto cfg2 = create_config("Thread 2", 1, 3 * 1024, 5);
+    auto cfg2 = mTask2.create_config("Thread 2", 1, 3 * 1024, 5);
     esp_pthread_set_cfg(&cfg2);
     std::thread mThread2(&AppTask::Task2::run, &mTask2);
 

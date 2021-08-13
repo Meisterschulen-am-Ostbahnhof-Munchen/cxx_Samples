@@ -24,6 +24,16 @@ namespace AppTask
     {
     }
 
+    esp_pthread_cfg_t AbstractTask::create_config(const char *name, int core_id, int stack, int prio)
+    {
+        auto cfg = esp_pthread_get_default_config();
+        cfg.thread_name = name;
+        cfg.pin_to_core = core_id;
+        cfg.stack_size = stack;
+        cfg.prio = prio;
+        return cfg;
+    }
+
     void AbstractTask::run()
     {
 
