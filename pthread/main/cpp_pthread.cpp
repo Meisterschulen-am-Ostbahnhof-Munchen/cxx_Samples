@@ -93,12 +93,12 @@ extern "C" void app_main(void)
     cfg = create_config("Thread 1", 0, 3 * 1024, 5);
     cfg.inherit_cfg = true;
     esp_pthread_set_cfg(&cfg);
-    std::thread thread_1(spawn_another_thread);
+    std::thread mThread1(spawn_another_thread);
 
     // Create a thread on core 1.
     cfg = create_config("Thread 2", 1, 3 * 1024, 5);
     esp_pthread_set_cfg(&cfg);
-    std::thread thread_2(thread_func);
+    std::thread mThread2(thread_func);
 
     // Let the main task do something too
     while (true) {
