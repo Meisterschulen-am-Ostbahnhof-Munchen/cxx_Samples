@@ -12,6 +12,7 @@
 #include <chrono>
 #include "AbstractTask.h"
 #include "print_thread_info.h"
+#include "esp_pthread.h"
 
 namespace AppTask
 {
@@ -37,17 +38,16 @@ namespace AppTask
     {
     }
 
-    esp_pthread_cfg_t AbstractTask::create_config(const char *name, int core_id, int stack, int prio)
+    void AbstractTask::create_config(const char *name, int core_id, int stack, int prio)
     {
 		this->d->cfg.thread_name = name;
     	this->d->cfg.pin_to_core = core_id;
     	this->d->cfg.stack_size = stack;
     	this->d->cfg.prio = prio;
-        return this->d->cfg;
     }
 
-    esp_err_t AbstractTask::esp_pthread_set_cfg(const esp_pthread_cfg_t *cfg) {
-    	return esp_pthread_set_cfg(cfg);
+    esp_err_t AbstractTask::esp_pthread_set_config(void) {
+    	return esp_pthread_set_cfg(&this->d->cfg);
     }
 
     void AbstractTask::run()

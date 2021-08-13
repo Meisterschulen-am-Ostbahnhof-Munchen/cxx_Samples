@@ -12,7 +12,7 @@
 
 #include <chrono>
 #include <atomic>
-#include "esp_pthread.h"
+#include "esp_err.h"
 
 using namespace std::chrono;
 
@@ -28,9 +28,9 @@ namespace AppTask
         AbstractTask();
         virtual ~AbstractTask();
 
-        esp_pthread_cfg_t create_config(const char *name, int core_id, int stack, int prio);
+        void create_config(const char *name, int core_id, int stack, int prio);
 
-        esp_err_t esp_pthread_set_cfg(const esp_pthread_cfg_t *cfg);
+        esp_err_t esp_pthread_set_config(void);
 
         /*
         The tasks run method .
