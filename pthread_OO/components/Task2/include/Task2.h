@@ -8,8 +8,27 @@
 #ifndef COMPONENTS_TASK2_INCLUDE_TASK2_H_
 #define COMPONENTS_TASK2_INCLUDE_TASK2_H_
 
+#include "AbstractTask.h"
 
+namespace AppTask
+{
 
+    class Task2 : public AbstractTask
+    {
+    public:
+        Task2();
+        virtual ~Task2();
 
+    protected:
+
+        bool runInit() override;
+        bool runAppInit() override;
+        bool runCyclic() override;
+
+    private:
+
+    };
+
+} /* namespace AppTask */
 
 #endif /* COMPONENTS_TASK2_INCLUDE_TASK2_H_ */
