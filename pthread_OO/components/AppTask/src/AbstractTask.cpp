@@ -15,8 +15,21 @@
 
 namespace AppTask
 {
+
+	class AbstractTask::Private {
+	public:
+		esp_pthread_cfg_t cfg;
+		Private()
+		{
+			this->cfg = esp_pthread_get_default_config();
+		}
+
+	};
+
+
     AbstractTask::AbstractTask()
-    : milli_cycle(10)
+    : d(new Private),
+      milli_cycle(10)
     {
     }
 
@@ -26,12 +39,11 @@ namespace AppTask
 
     esp_pthread_cfg_t AbstractTask::create_config(const char *name, int core_id, int stack, int prio)
     {
-        auto cfg = esp_pthread_get_default_config();
-        cfg.thread_name = name;
-        cfg.pin_to_core = core_id;
-        cfg.stack_size = stack;
-        cfg.prio = prio;
-        return cfg;
+		this->d->cfg.thread_name = name;
+    	this->d->cfg.pin_to_core = core_id;
+    	this->d->cfg.stack_size = stack;
+    	this->d->cfg.prio = prio;
+        return this->d->cfg;
     }
 
     esp_err_t AbstractTask::esp_pthread_set_cfg(const esp_pthread_cfg_t *cfg) {
@@ -139,6 +151,38 @@ namespace AppTask
 
 	void AbstractTask::setMilliCycle(std::chrono::milliseconds milliCycle) {
 		milli_cycle = milliCycle;
+	}
+
+	int AbstractTask::getCoreId() const {
+		return this->d->cfg.pin_to_core;
+	}
+
+	void AbstractTask::setCoreId(int coreId) {
+		this->d->cfg.pin_to_core = coreId;
+	}
+
+	const char* AbstractTask::getName() const {
+		return this->d->cfg.thread_name;
+	}
+
+	void AbstractTask::setName(const char *name) {
+		this->d->cfg.thread_name = name;
+	}
+
+	int AbstractTask::getPrio() const {
+		return this->d->cfg.prio;
+	}
+
+	void AbstractTask::setPrio(int prio) {
+		this->d->cfg.prio = prio;
+	}
+
+	int AbstractTask::getStack() const {
+		return this->d->cfg.stack_size;
+	}
+
+	void AbstractTask::setStack(int stack) {
+		this->d->cfg.stack_size = stack;
 	}
 
 } /* namespace AppTask */

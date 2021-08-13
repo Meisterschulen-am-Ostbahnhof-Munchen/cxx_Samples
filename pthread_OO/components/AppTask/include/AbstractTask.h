@@ -67,6 +67,18 @@ namespace AppTask
 		 */
 		void setMilliCycle(std::chrono::milliseconds milliCycle);
 
+		int getCoreId() const;
+		void setCoreId(int coreId);
+
+		const char* getName() const;
+		void setName(const char *name);
+
+		int getPrio() const;
+		void setPrio(int prio);
+
+		int getStack() const;
+		void setStack(int stack);
+
     protected:
 
         /**
@@ -109,6 +121,9 @@ namespace AppTask
         static void cbErrorOutp(uint8_t bFun, uint8_t bLocation, int16_t iCause);
 
     private:
+
+        class Private;
+        Private * d;
 
         /** This variable is the cycle Time of the Task.  */
         std::chrono::milliseconds milli_cycle;
