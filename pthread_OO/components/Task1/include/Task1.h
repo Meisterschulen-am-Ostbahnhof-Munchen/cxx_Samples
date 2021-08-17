@@ -13,7 +13,7 @@
 namespace AppTask
 {
 
-    class Task1 : public AbstractTask
+    class Task1 : virtual public AbstractTask
     {
     public:
         Task1();
