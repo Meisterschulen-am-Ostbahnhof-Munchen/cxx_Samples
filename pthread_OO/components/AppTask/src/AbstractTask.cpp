@@ -13,8 +13,7 @@
 #include "AbstractTask.h"
 #include "print_thread_info.h"
 #include "esp_pthread.h"
-#include <freertos/FreeRTOS.h>
-#include <freertos/task.h>
+
 
 #define LOG_LOCAL_LEVEL ESP_LOG_INFO //set this to ESP_LOG_WARN in productive Environment.
 #include "esp_log.h"
@@ -39,12 +38,10 @@ namespace AppTask
     : d(new Private),
       milli_cycle(10)
     {
-
     }
 
     AbstractTask::~AbstractTask()
     {
-
     }
 
     void AbstractTask::create_config(const char *name, int core_id, int stack, int prio)

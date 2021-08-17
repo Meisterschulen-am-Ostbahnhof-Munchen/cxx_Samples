@@ -23,6 +23,7 @@
 void print_thread_info(const char *extra)
 {
     std::stringstream ss;
+    ss << "*****************************************************";
     if (extra) {
         ss << extra;
     }
