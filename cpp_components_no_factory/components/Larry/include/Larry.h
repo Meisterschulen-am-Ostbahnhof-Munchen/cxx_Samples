@@ -9,7 +9,7 @@
 #define COMPONENTS_STOOGE_INCLUDE_LARRY_H_
 
 
-class Larry: public Stooge
+class Larry: virtual public Stooge
 {
   public:
     void slap_stick();
