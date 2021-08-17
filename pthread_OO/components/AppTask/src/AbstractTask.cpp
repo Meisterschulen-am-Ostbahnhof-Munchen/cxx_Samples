@@ -13,6 +13,13 @@
 #include "AbstractTask.h"
 #include "print_thread_info.h"
 #include "esp_pthread.h"
+#include <freertos/FreeRTOS.h>
+#include <freertos/task.h>
+
+#define LOG_LOCAL_LEVEL ESP_LOG_INFO //set this to ESP_LOG_WARN in productive Environment.
+#include "esp_log.h"
+
+
 
 namespace AppTask
 {
@@ -32,10 +39,12 @@ namespace AppTask
     : d(new Private),
       milli_cycle(10)
     {
+
     }
 
     AbstractTask::~AbstractTask()
     {
+
     }
 
     void AbstractTask::create_config(const char *name, int core_id, int stack, int prio)
@@ -44,20 +53,23 @@ namespace AppTask
     	this->d->cfg.pin_to_core = core_id;
     	this->d->cfg.stack_size = stack;
     	this->d->cfg.prio = prio;
+    	ESP_LOGI(this->d->cfg.thread_name, " **** create_config");
     }
 
     esp_err_t AbstractTask::esp_pthread_set_config(void) {
     	return esp_pthread_set_cfg(&this->d->cfg);
+    	ESP_LOGI(this->d->cfg.thread_name, " **** set_config");
     }
 
     void AbstractTask::run()
     {
+    	ESP_LOGI(this->d->cfg.thread_name, " **** run");
 
         while (!m_abort.load())
         {
             if (runInit())
             {
-                // initialization is complete
+            	ESP_LOGI(this->d->cfg.thread_name, " **** initialization is complete");
                 m_initDone = true;
                 break;
             }
@@ -65,9 +77,9 @@ namespace AppTask
             std::this_thread::sleep_for(std::chrono::milliseconds(10));
         }
 
-        /* at this point the task is initialized */
+    	ESP_LOGI(this->d->cfg.thread_name, " **** at this point the task is initialized");
 
-        /* wait for starting cyclic processing */
+    	ESP_LOGI(this->d->cfg.thread_name, " **** wait for starting cyclic processing");
         while (!m_abort.load())
         {
             if (m_cyclic.load())
@@ -78,10 +90,10 @@ namespace AppTask
             std::this_thread::sleep_for(std::chrono::milliseconds(10));
         }
 
-        /* there is additional initialization of clients and application after core and base are initialized */
+    	ESP_LOGI(this->d->cfg.thread_name, " **** there is additional initialization of clients and application after core and base are initialized");
         runAppInit();
 
-        /* cyclic processing starts */
+    	ESP_LOGI(this->d->cfg.thread_name, " **** cyclic processing starts");
         while (!m_abort.load())
         {
             (void)runCyclic();
@@ -89,7 +101,7 @@ namespace AppTask
             std::this_thread::sleep_for(std::chrono::milliseconds(milli_cycle));
         }
 
-        /* any cleanup before terminating */
+    	ESP_LOGI(this->d->cfg.thread_name, " **** any cleanup before terminating");
         while (!runExit())
         {
             std::this_thread::sleep_for(std::chrono::milliseconds(10));
