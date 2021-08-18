@@ -27,7 +27,7 @@ extern "C" void app_main(void)
 {
 
 
-	 vector<Stooge*> roles;
+	 vector<shared_ptr<Stooge>> roles;
 
 
      cout << "Example cpp_with_facory." << endl;
@@ -39,8 +39,7 @@ extern "C" void app_main(void)
 
      for (int i = 0; i < roles.size(); i++)
        roles[i]->slap_stick();
-     for (int i = 0; i < roles.size(); i++)
-       delete roles[i];
+
 
 
      cout << "Example finished." << endl;

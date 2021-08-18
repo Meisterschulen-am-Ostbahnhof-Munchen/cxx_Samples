@@ -7,7 +7,7 @@
 
 
 
-
+#include <memory>
 #include "Stooge.h"
 #include "StoogeFactory.h"
 #include "Larry.h"
@@ -16,19 +16,30 @@
 
 
 
+using namespace std;
 
 
 
-
-Stooge *StoogeFactory::make_stooge(t_choice choice)
+std::shared_ptr<Stooge> StoogeFactory::make_stooge(t_choice choice)
 {
+
+
+    static shared_ptr<Larry> 	sp_Larry = make_shared<Larry>();
+    static shared_ptr<Moe>		sp_Moe   = make_shared<Moe>();
+    static shared_ptr<Curly> 	sp_Curly = make_shared<Curly>();
+
+
+
+
+
+    //give the Object
 	switch (choice) {
 		case cLarry:
-		    return new Larry;
+		    return sp_Larry;
 		case cMoe:
-		    return new Moe;
+		    return sp_Moe;
 		case cCurly:
 		default: //needed to statisfy the Compiler.
-		    return new Curly;
+		    return sp_Curly;
 	}
 }

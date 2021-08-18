@@ -18,7 +18,7 @@ class StoogeFactory
 {
   public:
     // Factory Method
-    static Stooge *make_stooge(t_choice choice);
+	static std::shared_ptr<Stooge> make_stooge(t_choice choice);
 };
 
 

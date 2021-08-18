@@ -15,6 +15,9 @@
 class Stooge
 {
   public:
+	Stooge() {}
+	Stooge(Stooge const&) = delete;
+	Stooge& operator=(Stooge const&) = delete;
 	// Empty virtual destructor for proper cleanup
 	virtual ~Stooge() {}
 
