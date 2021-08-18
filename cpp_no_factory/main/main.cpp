@@ -16,6 +16,7 @@ using std::vector;
 #include "Larry.h"
 #include "Moe.h"
 #include "Curly.h"
+#include "CurlyLarry.h"
 
 
 /* Inside .cpp file, app_main function must be declared with C linkage */
@@ -31,6 +32,7 @@ extern "C" void app_main(void)
      roles.push_back(new Larry);
      roles.push_back(new Moe);
      roles.push_back(new Curly);
+     roles.push_back(new CurlyLarry);
 
      for (int i = 0; i < roles.size(); i++)
        roles[i]->slap_stick();

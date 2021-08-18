@@ -11,7 +11,7 @@
 
 
 
-class Curly: public Stooge
+class Curly: virtual public Stooge
 {
   public:
     void slap_stick();
