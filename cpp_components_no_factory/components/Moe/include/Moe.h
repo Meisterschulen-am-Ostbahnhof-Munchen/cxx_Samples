@@ -10,7 +10,7 @@
 
 
 
-class Moe: public Stooge
+class Moe: virtual public Stooge
 {
   public:
     void slap_stick();
